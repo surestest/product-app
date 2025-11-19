@@ -1,4 +1,4 @@
-// src/components/ProductForm.js - Updated to include createdAt, isActive, and tags
+
 
 import React, { useState, useEffect } from 'react';
 
@@ -10,9 +10,9 @@ const ProductForm = ({ initialProduct, onSubmit, onCancel }) => {
     category: '',
     stock: '',
     description: '',
-    // New fields: Convert tags array to comma-separated string for input
+    
     tags: initialProduct?.tags ? initialProduct.tags.join(', ') : '',
-    isActive: initialProduct?.isActive !== undefined ? initialProduct.isActive : true, // Default to true
+    isActive: initialProduct?.isActive !== undefined ? initialProduct.isActive : true,
     // createdAt is usually handled by the backend, but we initialize it here
     createdAt: initialProduct?.createdAt || new Date().toISOString(),
     ...initialProduct, 
@@ -22,7 +22,7 @@ const ProductForm = ({ initialProduct, onSubmit, onCancel }) => {
 
   const [errors, setErrors] = useState({});
 
-  // Effect to re-populate form when editingProduct changes
+  
   useEffect(() => {
     setFormData({
       name: '',
@@ -56,7 +56,7 @@ const ProductForm = ({ initialProduct, onSubmit, onCancel }) => {
     setErrors({ ...errors, [name]: '' });
   };
 
-  // Validation logic (omitted for brevity, assume original validation is present)
+
   const validate = () => {
     const newErrors = {};
     if (!formData.name) newErrors.name = 'Product name is required.';
@@ -68,11 +68,11 @@ const ProductForm = ({ initialProduct, onSubmit, onCancel }) => {
     return Object.keys(newErrors).length === 0;
   };
 
-  // Submission handler
+ 
   const handleSubmit = (e) => {
     e.preventDefault();
     if (validate()) {
-      // Prepare data for submission: convert tags string back to array
+      // Prepare  the data for submission
       const tagsArray = formData.tags ? formData.tags.split(',').map(tag => tag.trim()).filter(tag => tag.length > 0) : [];
 
       onSubmit({
