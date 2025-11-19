@@ -17,9 +17,8 @@ const ProductCard = ({ product, onEdit }) => {
           {product.isActive ? 'Active' : 'Inactive'}
         </span>
       </p>
-      {/* Tags Display */}
       <p className="tags-short">
-        <strong>Tags:</strong> {product.tags && product.tags.length > 0 ? product.tags.join(', ') : '-'}
+        <strong>Tags:</strong> {product.tags && product.tags.slice(0, 2).join(', ') + (product.tags.length > 2 ? '...' : '')}
       </p>
       <p className="description-short">{product.description || 'No description.'}</p>
       <button onClick={() => onEdit(product)}>Edit</button>
