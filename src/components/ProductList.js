@@ -1,4 +1,4 @@
-// src/components/ProductList.js
+
 
 import React from 'react';
 
