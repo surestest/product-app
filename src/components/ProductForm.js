@@ -10,19 +10,19 @@ const ProductForm = ({ initialProduct, onSubmit, onCancel }) => {
     category: '',
     stock: '',
     description: '',
-    
+    // New fields: Convert tags 
     tags: initialProduct?.tags ? initialProduct.tags.join(', ') : '',
     isActive: initialProduct?.isActive !== undefined ? initialProduct.isActive : true,
-    // createdAt is usually handled by the backend, but we initialize it here
+    
     createdAt: initialProduct?.createdAt || new Date().toISOString(),
     ...initialProduct, 
-    // Re-set tags after spread to ensure string format for the input field
+   
     tags: initialProduct?.tags ? initialProduct.tags.join(', ') : '',
   });
 
   const [errors, setErrors] = useState({});
 
-  
+ 
   useEffect(() => {
     setFormData({
       name: '',
@@ -39,7 +39,7 @@ const ProductForm = ({ initialProduct, onSubmit, onCancel }) => {
     setErrors({});
   }, [initialProduct]);
 
-  // Handle input changes
+ 
   const handleChange = (e) => {
     const { name, value, type, checked } = e.target;
     let newValue;
@@ -56,7 +56,7 @@ const ProductForm = ({ initialProduct, onSubmit, onCancel }) => {
     setErrors({ ...errors, [name]: '' });
   };
 
-
+  
   const validate = () => {
     const newErrors = {};
     if (!formData.name) newErrors.name = 'Product name is required.';
@@ -72,7 +72,7 @@ const ProductForm = ({ initialProduct, onSubmit, onCancel }) => {
   const handleSubmit = (e) => {
     e.preventDefault();
     if (validate()) {
-      // Prepare  the data for submission
+      
       const tagsArray = formData.tags ? formData.tags.split(',').map(tag => tag.trim()).filter(tag => tag.length > 0) : [];
 
       onSubmit({
@@ -81,7 +81,7 @@ const ProductForm = ({ initialProduct, onSubmit, onCancel }) => {
         stock: parseInt(formData.stock) || 0,
         tags: tagsArray,
         id: formData.id || Date.now(),
-        // Ensure createdAt is retained or set for new products
+       
         createdAt: formData.createdAt, 
         isActive: formData.isActive,
       });
@@ -93,14 +93,14 @@ const ProductForm = ({ initialProduct, onSubmit, onCancel }) => {
     <div className="form-container">
       <h3>{initialProduct ? 'Edit Product' : 'Add New Product'}</h3>
       <form onSubmit={handleSubmit}>
-        {/* Name, Price, Category, Stock, Description fields (Same as before) */}
+      
         <div><label>Name:</label><input type="text" name="name" value={formData.name} onChange={handleChange} required />{errors.name && <p className="error">{errors.name}</p>}</div>
         <div><label>Price:</label><input type="number" name="price" value={formData.price} onChange={handleChange} required min="0.01" step="0.01" />{errors.price && <p className="error">{errors.price}</p>}</div>
         <div><label>Category:</label><input type="text" name="category" value={formData.category} onChange={handleChange} required />{errors.category && <p className="error">{errors.category}</p>}</div>
         <div><label>Stock:</label><input type="number" name="stock" value={formData.stock} onChange={handleChange} min="0" />{errors.stock && <p className="error">{errors.stock}</p>}</div>
         <div><label>Description (Optional):</label><textarea name="description" value={formData.description} onChange={handleChange} /></div>
 
-        {/* --- New Fields in Form --- */}
+       
         <div>
           <label>Tags (Comma Separated):</label>
           <input type="text" name="tags" value={formData.tags} onChange={handleChange} placeholder="e.g., electronic, wireless, portable" />
@@ -115,7 +115,7 @@ const ProductForm = ({ initialProduct, onSubmit, onCancel }) => {
           <label>Is Active:</label>
           <input type="checkbox" name="isActive" checked={formData.isActive} onChange={handleChange} style={{ width: 'auto', display: 'inline-block', marginLeft: '10px' }} />
         </div>
-        {/* --- End New Fields --- */}
+       
 
         <div className="form-buttons">
           <button type="submit">{initialProduct ? 'Save Changes' : 'Add Product'}</button>
