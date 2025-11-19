@@ -1,7 +1,7 @@
-
+/* src/index.css - Clean English Version */
 body {
   font-family: sans-serif;
-  margin: 20px;
+  margin: 0;
   background-color: #f4f4f9;
 }
 
@@ -19,25 +19,38 @@ hr {
   border-top: 1px solid #eee;
 }
 
-
+/* -------------------- Control Panel Styles -------------------- */
 .control-panel {
   display: flex;
   justify-content: space-between;
   align-items: center;
   margin-bottom: 20px;
   flex-wrap: wrap;
+  gap: 15px;
+}
+
+.search-box {
+  flex-grow: 1;
+  min-width: 250px;
 }
 
 .search-box label {
   font-weight: bold;
   margin-right: 10px;
+  display: block;
+  margin-bottom: 5px;
 }
 
 .search-box input {
   padding: 8px;
   border: 1px solid #ccc;
   border-radius: 4px;
-  width: 250px;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.view-toggle {
+  display: flex;
 }
 
 .view-toggle button {
@@ -49,6 +62,7 @@ hr {
   margin-left: 5px;
   border-radius: 4px;
   transition: background-color 0.3s, color 0.3s;
+  white-space: nowrap;
 }
 
 .view-toggle button.active {
@@ -56,19 +70,22 @@ hr {
   color: white;
 }
 
-
+/* -------------------- Form Styles -------------------- */
 .form-container h3 {
   color: #333;
   margin-bottom: 15px;
 }
+
 .form-container div {
   margin-bottom: 15px;
 }
+
 .form-container label {
   display: block;
   font-weight: bold;
   margin-bottom: 5px;
 }
+
 .form-container input[type="text"],
 .form-container input[type="number"],
 .form-container textarea {
@@ -95,14 +112,30 @@ hr {
   margin-top: 5px;
 }
 
+.add-product-button {
+  padding: 12px 20px;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 16px;
+  transition: background-color 0.3s;
+}
 
+.add-product-button:hover {
+  background-color: #0056b3;
+}
+
+/* -------------------- Table Styles (ProductList) -------------------- */
 .product-table {
   width: 100%;
   border-collapse: collapse;
   margin-bottom: 20px;
 }
 
-.product-table th, .product-table td {
+.product-table th,
+.product-table td {
   border: 1px solid #ddd;
   padding: 12px;
   text-align: left;
@@ -118,7 +151,7 @@ hr {
   font-weight: bold;
 }
 
-
+/* -------------------- Card Grid Styles (ProductGrid) -------------------- */
 .product-grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
@@ -138,69 +171,130 @@ hr {
   margin-top: 0;
   color: #007bff;
 }
+
 .product-card p {
-    margin: 5px 0;
+  margin: 5px 0;
 }
+
 .product-card button {
-    margin-top: 10px;
-    padding: 8px 12px;
-    background-color: #ffc107;
-    color: #333;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
+  margin-top: 10px;
+  padding: 8px 12px;
+  background-color: #ffc107;
+  color: #333;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
 }
 
-
+/* -------------------- Pagination Styles -------------------- */
 .pagination {
-    margin-top: 20px;
-    display: flex;
-    justify-content: center;
+  margin-top: 20px;
+  display: flex;
+  justify-content: center;
 }
 
 .pagination ul {
-    list-style: none;
-    padding: 0;
-    margin: 0;
-    display: flex;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
 }
 
 .pagination li {
-    margin: 0 5px;
+  margin: 0 3px;
 }
 
 .pagination button {
-    padding: 8px 12px;
-    border: 1px solid #ddd;
-    background-color: white;
-    cursor: pointer;
-    border-radius: 4px;
+  padding: 8px 12px;
+  border: 1px solid #ddd;
+  background-color: white;
+  cursor: pointer;
+  border-radius: 4px;
 }
 
 .pagination li.active button {
-    background-color: #007bff;
-    color: white;
-    border-color: #007bff;
+  background-color: #007bff;
+  color: white;
+  border-color: #007bff;
 }
 
 .pagination button:disabled {
-    cursor: not-allowed;
-    opacity: 0.5;
+  cursor: not-allowed;
+  opacity: 0.5;
 }
 
-.status-dot {
-    font-weight: bold;
-    padding: 3px 6px;
-    border-radius: 4px;
+/* -------------------- MEDIA QUERIES (RESPONSIVENESS) -------------------- */
+@media (max-width: 768px) {
+  .app-container {
+    padding: 10px;
+  }
+
+  h1 {
+    font-size: 1.5em;
+    text-align: center;
+  }
+
+  .control-panel {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .search-box {
+    width: 100%;
+    min-width: 100%;
+  }
+
+  .view-toggle {
+    width: 100%;
+    justify-content: space-around;
+  }
+
+  .view-toggle button {
+    flex: 1;
+    margin: 0 2px;
+    padding: 8px;
     font-size: 0.9em;
+  }
+
+  .form-buttons {
+    display: flex;
+    gap: 10px;
+  }
+
+  .form-buttons button {
+    flex: 1;
+    margin-right: 0;
+  }
+
+  .table-responsive-wrapper {
+    overflow-x: auto;
+    width: 100%;
+  }
+
+  .product-table {
+    min-width: 600px;
+    font-size: 0.9em;
+  }
+
+  .product-table th,
+  .product-table td {
+    padding: 8px;
+  }
+
+  .product-table .description-col {
+    display: none;
+  }
+
+  .product-grid {
+    grid-template-columns: 1fr;
+    gap: 15px;
+  }
+
+  .pagination button {
+    padding: 6px 8px;
+    font-size: 0.85em;
+  }
 }
 
-.status-dot.active {
-    color: #155724;
-    background-color: #d4edda;
-}
-
-.status-dot.inactive {
-    color: #721c24;
-    background-color: #f8d7da;
-}
